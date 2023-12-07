@@ -1,14 +1,15 @@
 package models
 
 import (
-	"github.com/jinzhu/gorm"
-	"github.com/Hosein110011/go-api/pkg/config"
+	// "gorm.io/driver/postgres"
+  	"gorm.io/gorm"
+	"github.com/Hosein1100011/go-api/pkg/config"
 )
 
 var db *gorm.DB
 
 type Book struct {
-	gorm.model
+	gorm.Model
 	Name        string `gorm:""json:"name"`
 	Author      string `json:"author"`
 	Publication string `json:"publication"`
@@ -21,7 +22,7 @@ func init() {
 }
 
 func (b *Book) CreateBook() *Book {
-	db.NewRecord(b)
+	// db.NewRecord(b)
 	db.Create(&b)
 	return b
 }
@@ -40,6 +41,6 @@ func GetBookById(Id int64) (*Book, *gorm.DB) {
 
 func DeleteBook(ID int64) Book{
 	var book Book
-	db.Where("ID=?", ID).Delete(book)
-	return book
+	db.Where("ID=?", ID).Delete(&book)
+	return book                          
 }

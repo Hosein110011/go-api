@@ -4,8 +4,8 @@ import (
 	"log"
 	"net/http"
 	"github.com/gorilla/mux"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/Hosein110011/go-api/pkg/routes"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/Hosein1100011/go-api/pkg/routes"
 )
 
 func main() {

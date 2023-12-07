@@ -1,9 +1,10 @@
 package config
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
-
+	// "github.com/jinzhu/gorm"
+	// _ "github.com/jinzhu/gorm/dialects/postgres"
+	"gorm.io/driver/postgres"
+  	"gorm.io/gorm"
 )
 
 var (
@@ -11,9 +12,12 @@ var (
 )
 
 func Connect() {
-	d, err := gorm.Open("mysql", "mysql:h55555H55555h/book?charset=utf8&parseTime=True&loc=Local")
+	d, err := gorm.Open(postgres.New(postgres.Config{
+		DSN: "user=postgres password=h55555H55555h dbname=go port=5432 sslmode=disable TimeZone=Asia/Tehran",
+		PreferSimpleProtocol: true, // disables implicit prepared statement usage
+	}), &gorm.Config{})
 	if err != nil {
-		 panic(err)
+		panic("failed to connect database")
 	}
 	db = d
 }
